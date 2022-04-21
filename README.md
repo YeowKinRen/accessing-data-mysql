@@ -18,7 +18,7 @@ You can perform RESTful API requests such as GET, POST, PUT, PATCH, and DELETE r
 {"id":1,"name":"julio.fletcher@example.com","email":"Julio Fletcher"},{"id":2,"name":"alison.grant@example.com","email":"Alison Grant"},{"id":3,"name":"magdalena.campos@example.com","email":"Magdalena Campos"},{"id":4,"name":"alfons.stemmler@example.com","email":"Alfons Stemmler"},{"id":5,"name":"milana.martin@example.com","email":"Milana Martin"}
 ```
 
-You can implement the requests with [Projection](https://docs.spring.io/spring-data/jpa/docs/current/reference/html/#projections) and/or [Pagination and Sorting](https://docs.spring.io/spring-data/rest/docs/2.0.0.M1/reference/html/paging-chapter.html#:~:text=4.-,Paging%20and%20Sorting,-4.1%C2%A0Paging).
+You can implement the requests in conjunction with [Projection](https://docs.spring.io/spring-data/jpa/docs/current/reference/html/#projections) and/or [Pagination and Sorting](https://docs.spring.io/spring-data/rest/docs/2.0.0.M1/reference/html/paging-chapter.html#:~:text=4.-,Paging%20and%20Sorting,-4.1%C2%A0Paging).
 
 #### POST
 
@@ -27,41 +27,45 @@ You can implement the requests with [Projection](https://docs.spring.io/spring-d
 ```
 ```
 
+### DELETE
+
+`curl -X DELETE http://localhost:8080/demo/delete/1`
+
+```
+USER_ID: 1 DELETED
+```
+
+### PUT
+
+`curl -X PUT -d "name=newName" http://localhost:8080/demo/put/1`
+
+```
+USER_ID: 1 UPDATED
+```
+
 Notes
 --------
 
 ### Spring Boot Annotations
 
-* ```@SpringBootApplication``` - combinations of three annotations ```@EnableAutoConfiguration```, ```@ComponentScan```, and ```@Configuration```
+- ```@SpringBootApplication```: combinations of 3 annotations namely ```@EnableAutoConfiguration```, ```@ComponentScan```, and ```@Configuration```
+  - ```@Configuration```: Tags the class as a source of bean definitions for the application context.
 
-⋅⋅⋅ ```@Configuration```: Tags the class as a source of bean definitions for the application context.
+  - ```@EnableAutoConfiguration```: Tells Spring Boot to start adding beans based on classpath settings, other beans, and various property settings. For example, if spring-webmvc is on the classpath, this annotation flags the application as a web application and activates key behaviors, such as setting up a DispatcherServlet.
 
-⋅⋅⋅ ```@EnableAutoConfiguration```: Tells Spring Boot to start adding beans based on classpath settings, other beans, and various property settings. For example, if spring-webmvc is on the classpath, this annotation flags the application as a web application and activates key behaviors, such as setting up a DispatcherServlet.
+  - ```@ComponentScan```: Tells Spring to look for other components, configurations, and services in the com/example package, letting it find the controllers.
 
-⋅⋅⋅ ```@ComponentScan```: Tells Spring to look for other components, configurations, and services in the com/example package, letting it find the controllers.
+- ```@Component```: annotation that allows Spring to automatically detect our custom beans
 
-<!-- ```configure(HttpSecurity http)```
+- ```@Controller```, ```Service```, ```Repository```: specialized form of ```@Component``` and annotations for controller as front controllers and the management of the REST interface, service as business logic implementation
+and repository as the access of database and the storage of the entity beans such as CRUD operations
 
-- used for configuration of web-based security at a resource level, based on a selection match. Requests will be allowed to be accessed from the Spring Security Filter Chain.
+- ```@RestController```: combination of the ```@Controller``` and ```@ResponseBody``` annotation
 
-```configure(WebSecurity web)```
-
-- used for configuration settings that impact global security (ignore resources, set debug mode, by-pass the Spring Security Filter Chain, reject requests by implementing a custom firewall definition).
-
-```configure(AuthenticationManagerBuilder auth)```
-
-- Allows for easily building in memory authentication, LDAP authentication, JDBC based authentication, adding UserDetailsService, and adding AuthenticationProvider's.
-
-[HTTPSecurity vs WebSecurity](https://ravthiru.medium.com/springboot-security-configuration-using-httpsecurity-vs-websecurity-1a7ec6a23273)<br />
-[Configure](https://stackoverflow.com/questions/22998731/httpsecurity-websecurity-and-authenticationmanagerbuilder#:~:text=General%20use%20of,passwordEncoder(new%20BCryptPasswordEncoder())%3B%0A%20%20%20%20%20%7D)<br />
-[Spring Security](https://boudhayan-dev.medium.com/demystifying-spring-security-setup-e0491acc7df7)<br /> -->
 
 Resource
 --------
 
 - [Accessing data with MySQL](https://spring.io/guides/gs/accessing-data-mysql/)
 
-<!-- 
-- [HTTPSecurity vs WebSecurity](https://ravthiru.medium.com/springboot-security-configuration-using-httpsecurity-vs-websecurity-1a7ec6a23273)
-- [Configure](https://stackoverflow.com/questions/22998731/httpsecurity-websecurity-and-authenticationmanagerbuilder#:~:text=General%20use%20of,passwordEncoder(new%20BCryptPasswordEncoder())%3B%0A%20%20%20%20%20%7D)
-- [Spring Security](https://boudhayan-dev.medium.com/demystifying-spring-security-setup-e0491acc7df7) -->
+

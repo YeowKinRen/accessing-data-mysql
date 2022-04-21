@@ -42,15 +42,15 @@ public class UserController {
   
   
   @DeleteMapping(path="delete/{userId}")
-  public ResponseEntity<Long> deleteUser(@PathVariable("userId") Long userId) {
+  public ResponseEntity<String> deleteUser(@PathVariable("userId") Long userId) {
 	  return userService.deleteUser(userId);
   }
   
   @PutMapping(path="put/{userId}")
-  public ResponseEntity<Object> updateUser(@PathVariable("userId")  Long userId, 
+  public ResponseEntity<String> updateUser(@PathVariable("userId")  Long userId, 
 		  @RequestParam(required=false) String name, 
 		  @RequestParam(required=false) String email) {
-	return userService.updateUser(userId,  name, email);  
+	return userService.updateUser(userId, name, email);  
   }
   
   @GetMapping(path="/PageUser/{pageNo}/{pageSize}")

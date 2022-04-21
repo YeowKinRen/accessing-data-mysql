@@ -50,27 +50,27 @@ public class UserService {
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
-    public ResponseEntity<Long> deleteUser(Long userId) {
+    public ResponseEntity<String> deleteUser(Long userId) {
     	if (userRepository.existsById(userId)) {
 	        userRepository.deleteById(userId);
-	        return new ResponseEntity<>(HttpStatus.OK);
+	        return new ResponseEntity<>("USER_ID: "+userId+" DELETED", HttpStatus.OK);
     	} else {
-    		return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+    		return new ResponseEntity<>("NOT_FOUND", HttpStatus.NOT_FOUND);
     	}
     }
     
     @Transactional
-    public ResponseEntity<Object> updateUser(Long userId, String name, String email) {
+    public ResponseEntity<String> updateUser(Long userId, String name, String email) {
     	Optional<User> userP = userRepository.findById(userId);
     	if (userP.isEmpty()) {
-    		return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+    		return new ResponseEntity<>("NOT_FOUND", HttpStatus.NOT_FOUND);
     	} else {
     		User user = userP.get();
     		if (name != null) 
     			user.setName(name);
     		if (email != null)
     			user.setEmail(email);
-    		return new ResponseEntity<>(HttpStatus.OK);
+    		return new ResponseEntity<>("USER_ID: "+userId+" UPDATED", HttpStatus.OK);
     	}
 
     }
