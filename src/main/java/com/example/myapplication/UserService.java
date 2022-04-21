@@ -37,13 +37,17 @@ public class UserService {
     public List<User> getAllUsers() {
         return userRepository.findAll();
     }
+    
+    public List<UserProjection> getAllProjectionUsers() {
+        return userRepository.findAllBy();
+    }
 
-    public String addUser(String name, String email) {
+    public ResponseEntity<Long> addUser(String name, String email) {
         User n = new User();
         n.setName(name);
         n.setEmail(email);
         userRepository.save(n);
-        return "Saved";
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 
     public ResponseEntity<Long> deleteUser(Long userId) {

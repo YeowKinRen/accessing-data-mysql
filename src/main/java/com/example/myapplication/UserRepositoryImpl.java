@@ -9,9 +9,6 @@ import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 
 public class UserRepositoryImpl implements UserRepositoryCustom {
-	
-	
-	
 
     @PersistenceContext
     EntityManager entityManager;
