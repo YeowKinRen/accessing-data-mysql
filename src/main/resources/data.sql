@@ -1,4 +1,4 @@
-insert into user values 
+insert ignore into user values 
   (1,'Julio Fletcher','julio.fletcher@example.com'),
   (2,'Alison Grant','alison.grant@example.com'),
   (3,'Magdalena Campos','magdalena.campos@example.com'),
